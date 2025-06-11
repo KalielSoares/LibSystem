@@ -21,4 +21,13 @@ public class Library
     {
         Books.Remove(book);
     }
+
+    public void ListBooks()
+    {
+        foreach (var book in Books)
+        {
+            Console.WriteLine($"book: {book.Title}");
+        }
+    }
+    
 }

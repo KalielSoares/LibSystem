@@ -9,7 +9,7 @@ public class Librarian : Person
         EmpolyeeId = Guid.NewGuid();
     }
 
-    public void AddBook(Library library,Book book)
+    public void AddBookToLibrary(Library library,Book book)
     {
         library.AddBook(book);
         Console.WriteLine($"{Name} has added {book.Title} to Library");
