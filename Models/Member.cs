@@ -8,6 +8,7 @@ public class Member : Person
     public Member(string name,string email) : base(name,email)
     {
         memberId = Guid.NewGuid();
+        BorrowedBooks = new List<Book>();
     }
 
     public void BorrowBook(Book book)
@@ -22,7 +23,8 @@ public class Member : Person
             BorrowedBooks.Add(book);
         }
     }
-
+    
+    
     public void ReturnBook(Book book)
     {
         if (BorrowedBooks.Contains(book))

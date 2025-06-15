@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using LibrarySystem.Models;
+﻿using LibrarySystem.Models;
 
 class Program
 {
@@ -17,9 +16,32 @@ class Program
         librarian.AddBookToLibrary(library, book2);
         
         library.ListBooks();
-
+        
+        var find = library.FindBook("The Pragmatic Programmer");
+        if (find != null)
+        {
+            Console.WriteLine($"Found book: {find.Title}");
+        }
+        else
+        {
+            Console.WriteLine("Book not found");
+        }
+        
+        
 
         Member member = new Member("Nathan", "nathanzinho@hotmail.com");
+        
+        
+        member.BorrowBook(book1);
+
+
+        var borrow = library.ListBorrowBooks();
+
+        Console.WriteLine("Os livros emprestados são: \n");
+        foreach (var VARIABLE in borrow)
+        {
+            Console.WriteLine($"{VARIABLE.Title}");
+        }
     }
 }
 

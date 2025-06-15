@@ -14,7 +14,14 @@ public class Library
 
     public void AddBook(Book book)
     {
-        Books.Add(book);
+        if (!Books.Any(x => x.ISBN == book.ISBN))
+        {
+            Books.Add(book);    
+        }
+        else
+        {
+            Console.WriteLine($"Book {book.ISBN} already exists");
+        }
     }
 
     public void RemoveBook(Book book)
@@ -26,8 +33,23 @@ public class Library
     {
         foreach (var book in Books)
         {
-            Console.WriteLine($"book: {book.Title}");
+            Console.WriteLine($"Title: {book.Title} | Author: {book.Author} | ISBN: {book.ISBN}");
         }
     }
+    
+    public Book? FindBook(string title)
+    {
+       
+            return Books.FirstOrDefault(b => b.Title.Equals(title));
+       
+      
+    }
+
+    public IEnumerable<Book> ListBorrowBooks()
+    {
+
+        return Books.Where(p => p.IsBorrowed == true);
+    }
+    
     
 }
