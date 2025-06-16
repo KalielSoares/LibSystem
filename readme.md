@@ -5,7 +5,7 @@ A simple console-based Library Management System in C# demonstrating object-orie
 ## 🚀 Features
 
 - Add and remove books to/from the library (by Librarian)
-- Borrow and return books (by Member)
+- Borrow books (by Member)
 - List all books with status (borrowed or available)
 - Find books by title
 
@@ -28,3 +28,5 @@ A simple console-based Library Management System in C# demonstrating object-orie
 ## 🧑‍💻 Author
 
 Kaliel Soares
+
+![img.png](img.png)
