@@ -4,44 +4,99 @@ class Program
 {
     static void Main(string[] args)
     {
-
-        Library library = new Library("Texas Library");
-
-        Librarian librarian = new Librarian("Kaliel", "Kalielsoares6@gmail.com");
-
-        Book book1 = new Book("Clean Code", "Robert C. Martin", "00001");
-        Book book2 = new Book("The Pragmatic Programmer", "Andrew Hunt", "00002");
+        //Inicialização das Variaveis
+        Librarian? librarianL = null;
+        bool exibirMenu = true;
+        Member member;
+        Book book;
         
-        librarian.AddBookToLibrary(library, book1);
-        librarian.AddBookToLibrary(library, book2);
+        Console.Clear();
+     
+
+
+        string l = "";
+        Console.WriteLine($"Library ***** ");
+        Console.WriteLine("Qual o nome da library?");
+        l = Console.ReadLine();
         
-        library.ListBooks();
+        Library nameLibrary = new Library(l);
         
-        var find = library.FindBook("The Pragmatic Programmer");
-        if (find != null)
+        
+
+        
+        // Loop do menu
+        while (exibirMenu)
         {
-            Console.WriteLine($"Found book: {find.Title}");
+            Console.Clear();
+            Console.WriteLine($"Library {l}");
+            Console.WriteLine();
+            Console.WriteLine("Digite a sua opção:");
+            Console.WriteLine("1 - Cadastrar Membro");
+            Console.WriteLine("2 - Cadastrar Bibliotecário");
+            Console.WriteLine("3 - Cadastrar Livro");
+            Console.WriteLine("4 - Remover Livro");
+            Console.WriteLine("5 - Listar Livros");
+            Console.WriteLine("6 - Encerrar");
+            Console.WriteLine();
+
+            //Depois que entender o funcionamento da conexão com Db refatorar esse trecho ->
+            
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    Console.Clear();
+                    Console.WriteLine("Digite o nome do novo membro: ");
+                    string nome = Console.ReadLine();
+                    Console.WriteLine("Digite o email do novo membro: ");
+                    string email = Console.ReadLine();
+                    member = new Member(nome, email);
+                    Console.WriteLine("Membro adicionado com sucesso.");
+                    break;
+                case "2":
+                    Console.Clear();
+                    Console.WriteLine("Digite o nome do novo Funcionário da biblioteca: ");
+                    string nomeL = Console.ReadLine();
+                    Console.WriteLine("Digite o email: ");
+                    string emailL = Console.ReadLine();
+                    librarianL = new Librarian(nomeL, emailL);
+                    Console.WriteLine("\nMembro adicionado com sucesso.\n");
+                    break;
+                case "3":
+                    Console.Clear();
+                    Console.WriteLine("Digite o titulo do livro: ");
+                    string titulo = Console.ReadLine();
+                    Console.WriteLine("Digite o autor do livro: ");
+                    string autor = Console.ReadLine();
+                    Console.WriteLine("Digite o código ISBN do livro: ");
+                    string isbn = Console.ReadLine();
+                    book = new Book(titulo, autor, isbn);
+                    librarianL.AddBookToLibrary(nameLibrary,book);
+                    break;
+                case "4":
+                    Console.Clear();
+                    Console.WriteLine("Digite o titulo do livro para ser removido: ");
+                    string tituloRemovido = Console.ReadLine();
+                    librarianL.RemoveBook(nameLibrary ,tituloRemovido);
+                    break;
+                case "5":
+                    Console.Clear();
+                    nameLibrary.ListBooks();
+                    break;
+                case "6":
+                    exibirMenu = false;
+                    break;
+
+                default:
+                    Console.WriteLine("Opção inválida");
+                    break;
+            }
+
+            Console.WriteLine("Pressione uma tecla para continuar");
+            Console.ReadLine();
         }
-        else
-        {
-            Console.WriteLine("Book not found");
-        }
+
         
         
-
-        Member member = new Member("Nathan", "nathanzinho@hotmail.com");
-        
-        
-        member.BorrowBook(book1);
-
-
-        var borrow = library.ListBorrowBooks();
-
-        Console.WriteLine("Os livros emprestados são: \n");
-        foreach (var VARIABLE in borrow)
-        {
-            Console.WriteLine($"{VARIABLE.Title}");
-        }
     }
 }
 

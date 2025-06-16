@@ -20,29 +20,37 @@ public class Library
         }
         else
         {
-            Console.WriteLine($"Book {book.ISBN} already exists");
+            Console.WriteLine($"Book with a {book.ISBN} already exists");
         }
     }
 
-    public void RemoveBook(Book book)
+    public void RemoveBook(string title)
     {
-        Books.Remove(book);
+        Book? bookToRemove = Books.FirstOrDefault(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
+    
+        if (bookToRemove != null)
+        {
+            Books.Remove(bookToRemove);
+            Console.WriteLine($"Book '{bookToRemove.Title}' removed.");
+        }
+        else
+        {
+            Console.WriteLine($"Book '{title}' not found.");
+        }
     }
+
 
     public void ListBooks()
     {
         foreach (var book in Books)
         {
-            Console.WriteLine($"Title: {book.Title} | Author: {book.Author} | ISBN: {book.ISBN}");
+            Console.WriteLine($"Title: {book.Title} | Author: {book.Author} | ISBN: {book.ISBN} | Borrow: {book.IsBorrowed}");
         }
     }
     
     public Book? FindBook(string title)
     {
-       
-            return Books.FirstOrDefault(b => b.Title.Equals(title));
-       
-      
+            return Books.FirstOrDefault(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
     }
 
     public IEnumerable<Book> ListBorrowBooks()

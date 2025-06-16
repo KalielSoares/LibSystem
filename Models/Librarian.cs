@@ -15,10 +15,10 @@ public class Librarian : Person
         Console.WriteLine($"{Name} has added {book.Title} to Library");
     }
 
-    public void RemoveBook(Library library, Book book)
+    public void RemoveBook(Library library, string title)
     {
-        library.RemoveBook(book);
-        Console.WriteLine($"{Name} has removed {book.Title} from Library");
+        library.RemoveBook(title);
+        Console.WriteLine($"{Name} has removed {title} from Library");
     }
     
 }
