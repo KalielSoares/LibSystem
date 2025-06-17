@@ -33,5 +33,16 @@ public class Member : Person
             BorrowedBooks.Remove(book);
         }
     }
+
+    public void listBorrowedBooks()
+    {
+        foreach (var book in BorrowedBooks)
+        {
+            Console.WriteLine($"{book}");
+        }
+    }
+    
+  
+
     
 }

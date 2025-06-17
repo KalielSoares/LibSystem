@@ -7,9 +7,9 @@ class Program
         //Inicialização das Variaveis
         Librarian? librarianL = null;
         bool exibirMenu = true;
-        Member member;
+        List<Member> members = new();
+
         Book book;
-        
         Console.Clear();
      
 
@@ -36,7 +36,9 @@ class Program
             Console.WriteLine("3 - Cadastrar Livro");
             Console.WriteLine("4 - Remover Livro");
             Console.WriteLine("5 - Listar Livros");
-            Console.WriteLine("6 - Encerrar");
+            Console.WriteLine("6 - Emprestar livro para um membro");
+            Console.WriteLine("7 - Listar Membros com livros emprestados");
+            Console.WriteLine("8 - Encerrar");
             Console.WriteLine();
 
             //Depois que entender o funcionamento da conexão com Db refatorar esse trecho ->
@@ -49,8 +51,11 @@ class Program
                     string nome = Console.ReadLine();
                     Console.WriteLine("Digite o email do novo membro: ");
                     string email = Console.ReadLine();
-                    member = new Member(nome, email);
+                    Member novoMembro = new Member(nome, email);
+                    members.Add(novoMembro);
+                    nameLibrary.Members.Add(novoMembro);
                     Console.WriteLine("Membro adicionado com sucesso.");
+                
                     break;
                 case "2":
                     Console.Clear();
@@ -76,13 +81,29 @@ class Program
                     Console.Clear();
                     Console.WriteLine("Digite o titulo do livro para ser removido: ");
                     string tituloRemovido = Console.ReadLine();
-                    librarianL.RemoveBook(nameLibrary ,tituloRemovido);
+                    librarianL.RemoveBook(nameLibrary,tituloRemovido);
                     break;
                 case "5":
                     Console.Clear();
                     nameLibrary.ListBooks();
                     break;
                 case "6":
+                    Console.Clear();
+                    Console.WriteLine("Digite o nome do membro que vai pegar o livro emprestado: ");
+                    string membroEmprestado = Console.ReadLine();
+                    Console.WriteLine("Digite o nome do livro: ");
+                    string nomeLivro = Console.ReadLine();
+                    Book tituloLivro = nameLibrary.FindBook(nomeLivro);
+                    librarianL.AddBookToMember(membroEmprestado,tituloLivro,nameLibrary);
+                    break;
+                case "7":
+                    Console.Clear();
+
+                    nameLibrary.MemberWithBook();
+
+                    
+                    break;
+                case "8":
                     exibirMenu = false;
                     break;
 

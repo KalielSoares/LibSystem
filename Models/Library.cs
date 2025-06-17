@@ -4,12 +4,14 @@ public class Library
 {
     public string Name { get; set; }
     public IList<Book> Books { get; set; }
+    public List<Member> Members { get; set; } 
 
 
     public Library(string name)
     {
         Name=name;
         Books = new List<Book>();
+        Members = new List<Member>();
     }
 
     public void AddBook(Book book)
@@ -57,6 +59,23 @@ public class Library
     {
 
         return Books.Where(p => p.IsBorrowed == true);
+    }
+
+    public void MemberWithBook()
+    {
+
+        var membersWithBook = Members.Where(m => m.BorrowedBooks.Any());
+        
+        foreach (var member in membersWithBook)
+        {
+            Console.WriteLine($"\nMembro: {member.Name} ");
+            Console.WriteLine("Livros emprestados:");
+
+            foreach (var book in member.BorrowedBooks)
+            {
+                Console.WriteLine($"Livro: {book.Title} escrito por: {book.Author}");
+            }
+        }
     }
     
     
